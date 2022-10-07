@@ -11,9 +11,15 @@ Vagrant.configure("2") do |config|
       servers['nics'].each do |nic|
         server.vm.network nic['type'], ip: nic['ip']
       end
+      if servers['scripts']
+        servers['scripts'].each do |script|
+            server.vm.provision "shell", path: script['path']
+        end
+      end
       server.vm.provider "virtualbox" do |vb|
         vb.memory = servers['ram']
       end
+
     end
   end
 end

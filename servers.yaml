@@ -4,24 +4,12 @@
     - type: "private_network"
       ip: "192.168.56.10"
   ram: 512
-  # files:
-  #   file1:
-  #     source: "wp/nginx/wordpress.conf"
-  #   file2:
-  #     source: "wp/wp-config.php"
-  # scripts:
-  #   - path: "provision/nginx-install.sh"
-  #   - path: "provision/wordpress-install.sh"
-  # dbuser: "mysql"
-  # dbpassword: "dbpassword"
-  # dbname: "wordpress_db"
+  scripts:
+    - path: "install-postgresql.sh"
 - name: slave
   nics:
     - type: "private_network"
       ip: "192.168.56.20"
   ram: 512
-  # scripts:
-  #   - path: "provision/mysql-install.sh"
-  # dbuser: "mysql"
-  # dbpassword: "dbpassword"
-  # dbname: "wordpress_db"
+  scripts:
+    - path: "install-postgresql.sh"
