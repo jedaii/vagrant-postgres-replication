@@ -6,6 +6,7 @@
   ram: 512
   scripts:
     - path: "install-postgresql.sh"
+    - path: "configure-master.sh"
 - name: slave
   nics:
     - type: "private_network"
@@ -13,3 +14,4 @@
   ram: 512
   scripts:
     - path: "install-postgresql.sh"
+    - path: "configure-replica.sh"
