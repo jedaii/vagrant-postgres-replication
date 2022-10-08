@@ -7,7 +7,7 @@
   scripts:
     - path: "install-postgresql.sh"
     - path: "configure-master.sh"
-- name: slave
+- name: replica
   nics:
     - type: "private_network"
       ip: "192.168.56.20"
@@ -15,3 +15,16 @@
   scripts:
     - path: "install-postgresql.sh"
     - path: "configure-replica.sh"
+- name: wp
+  nics:
+    - type: "private_network"
+      ip: "192.168.56.100"
+    - type: "public_network"
+      ip: "192.168.1.100"
+  ram: 400
+  scripts:
+    - path: "install-nginx.sh"
+    - path: "configure-wordpress.sh"
+  files:
+    wordpress-nginx-config:
+      source: "wp/wordpress.conf"

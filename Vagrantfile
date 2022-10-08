@@ -11,6 +11,11 @@ Vagrant.configure("2") do |config|
       servers['nics'].each do |nic|
         server.vm.network nic['type'], ip: nic['ip']
       end
+      if servers['files']
+        servers['files'].each do |name, file|
+          server.vm.provision "file", source: file['source'], destination: "/tmp/"
+        end
+      end
       if servers['scripts']
         servers['scripts'].each do |script|
             server.vm.provision "shell", path: script['path']
