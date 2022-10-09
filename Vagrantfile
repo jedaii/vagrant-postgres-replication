@@ -3,6 +3,18 @@
 require 'yaml'
 
 servers = YAML.load_file('servers.yaml')
+servers.each do |servers|
+    servers['nics'].each do |nic|
+      case servers['name']
+      when "master" #servers['name'].start_with?("master")
+        $master_ip = nic['ip']
+      when "replica" #servers['name'].start_with?("replica")
+        $replica_ip = nic['ip']
+      # when "wp" && (nic['type'] == 'private_network')
+      #   $wp_ip = nic['ip']
+      end
+    end
+end
 
 Vagrant.configure("2") do |config|
   servers.each do |servers|
@@ -18,7 +30,14 @@ Vagrant.configure("2") do |config|
       end
       if servers['scripts']
         servers['scripts'].each do |script|
-            server.vm.provision "shell", path: script['path']
+            server.vm.provision "shell", path: script['path'],
+              env: {
+                "DBUSER" => "#{servers['dbuser']}",
+                "DBPASSWORD" => "#{servers['dbpassword']}",
+                "DBNAME" => "#{servers['dbname']}",
+                "MASTER_IP" => $master_ip,
+                "REPLICA_IP" => $replica_ip
+              }
         end
       end
       server.vm.provider "virtualbox" do |vb|

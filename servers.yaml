@@ -7,6 +7,9 @@
   scripts:
     - path: "install-postgresql.sh"
     - path: "configure-master.sh"
+  dbuser: "admin_wp"
+  dbpassword: "wp_password"
+  dbname: "wp_db"
 - name: replica
   nics:
     - type: "private_network"
@@ -28,3 +31,6 @@
   files:
     wordpress-nginx-config:
       source: "wp/wordpress.conf"
+  dbuser: "admin_wp"
+  dbpassword: "wp_password"
+  dbname: "wp_db"
