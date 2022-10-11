@@ -18,6 +18,8 @@ Vagrant поднимает несколько виртуальных машин 
 - `dbname`  - Имя базы данных postgresql
 
 ## Использование:
-`git clone https://github.com/jedaii/vagrant-postgres-replication.git`
-`cd vagrant-postgres-replication`
-`vagrant up`
+```
+git clone https://github.com/jedaii/vagrant-postgres-replication.git
+cd vagrant-postgres-replication
+vagrant up
+```
