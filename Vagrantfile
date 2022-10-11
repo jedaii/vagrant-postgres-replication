@@ -6,12 +6,10 @@ servers = YAML.load_file('servers.yaml')
 servers.each do |servers|
     servers['nics'].each do |nic|
       case servers['name']
-      when "master" #servers['name'].start_with?("master")
+      when "master"
         $master_ip = nic['ip']
-      when "replica" #servers['name'].start_with?("replica")
+      when "replica"
         $replica_ip = nic['ip']
-      # when "wp" && (nic['type'] == 'private_network')
-      #   $wp_ip = nic['ip']
       end
     end
 end
