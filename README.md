@@ -16,3 +16,8 @@ Vagrant поднимает несколько виртуальных машин 
 - `dbuser`  - Пользователь базы данных postgresql
 - `dbpassword` - Пароль пользователя `dbuser`
 - `dbname`  - Имя базы данных postgresql
+
+## Использование:
+`git clone https://github.com/jedaii/vagrant-postgres-replication.git`
+`cd vagrant-postgres-replication`
+`vagrant up`

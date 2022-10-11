@@ -21,7 +21,7 @@ sudo rm -rf main; sudo mkdir main; sudo chown postgres:postgres main; sudo chmod
 # sudo chmod 0600 /var/lib/postgresql/11/.pgpass
 # echo "export PGPASSFILE=/var/lib/postgresql/11/.pgpass" | sudo tee /etc/profile.d/pgpass.sh
 
-# taking base backup from master
+# taking base backup from master node
 sudo -u postgres pg_basebackup -P -R -X stream -c fast -h ${MASTER_IP} -U postgres -D ./main
 
 sudo systemctl start postgresql
