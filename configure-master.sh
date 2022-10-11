@@ -7,10 +7,11 @@ sudo -u postgres psql -U postgres -c "create database ${DBNAME};"
 # creating user for wordpress db and granting priveleges for it
 sudo -u postgres psql -U postgres -c "create user ${DBUSER} with password '${DBPASSWORD}';"
 sudo -u postgres psql -U postgres -c "grant all privileges on database ${DBNAME} to ${DBUSER};"
-# editing pg_hba.conf
+# allow connections for user postgres from replica VM
 sudo sed -i "/^# .*listen on a non-local/a host replication postgres ${REPLICA_IP}\/24 trust" $PG_HBA
+# allow connections for $DBUSER from wordpress VM
 sudo sed -i "/.*host replication postgres/a host all ${DBUSER} 192.168.56.100/24 md5" $PG_HBA
-# editing postgresql.conf
+# allow listen connections on address $MASTER_IP and set other settings for replication
 sudo sed -e "s/.*listen_addresses.*/listen_addresses = 'localhost, ${MASTER_IP}'/" \
          -e "s/.*wal_level.*/wal_level = hot_standby/" \
          -e "s/.*archive_mode.*/archive_mode = on/" \
